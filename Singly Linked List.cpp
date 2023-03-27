@@ -98,6 +98,21 @@ public:
             temp2->next = temp;
         }
     
+    void insertBefore2 (int value, int target){
+        if(head->data == target){
+            insertAtHead(value);
+            return;
+        }
+        int cnt=0;
+        Node *temp1 = head;
+        while(temp1->data != target && temp1->next != NULL){
+            temp1 = temp1->next;
+            cnt++;
+        }
+        cnt++;
+        insertAt(value, cnt);
+    }
+    
     
     void insertAfter(int data, int targetData) {
             Node *temp = head;
