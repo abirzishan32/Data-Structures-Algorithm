@@ -265,18 +265,20 @@ public:
     
     
     void sort() {
-            Node *current, *index;
+            Node *i, *j;
             int temp;
-            for (current = head; current->next != NULL; current = current->next) {
-                for (index = current->next; index != NULL; index = index->next) {
-                    if (current->data > index->data) {
-                        temp = current->data;
-                        current->data = index->data;
-                        index->data = temp;
+            for (i = head; i->next != NULL; i = i->next) {
+                for (j = i->next; j != NULL; j = j->next) {
+                    if (i->data > j->data) {
+                        temp = i->data;
+                        i->data = j->data;
+                        j->data = temp;
                     }
                 }
             }
         }
+    
+    
     
     void reverseList() {
             Node *prev = NULL;
