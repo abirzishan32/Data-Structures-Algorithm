@@ -104,9 +104,9 @@ public:
             return;
         }
         int cnt=0;
-        Node *temp1 = head;
-        while(temp1->data != target && temp1->next != NULL){
-            temp1 = temp1->next;
+        Node *temp = head;
+        while(temp->data != target && temp->next != NULL){
+            temp = temp->next;
             cnt++;
         }
         cnt++;
@@ -128,6 +128,25 @@ public:
             temp2->next = temp->next;
             temp->next = temp2;
         }
+    
+    
+    void insertAfter2 (int value, int target){
+        int cnt=0;
+        Node *temp = head;
+        while(temp->data != target && temp->next != NULL){
+            temp = temp->next;
+            cnt++;
+        }
+        if(temp->next == NULL){
+            cout<<"Data not found"<<endl;
+            return;
+        }
+        cnt+=2;
+        insertAt(value, cnt);
+
+    }
+    
+    
     
     int countElements() {
             int count = 0;
