@@ -169,35 +169,26 @@ void deleteAtIndex(int index) {
 
 
 
-bool isPalindrome(Node *head) {
-    if (!head) return true;
-    
-    Node *slow = head, *fast = head;
-    while (fast->next && fast->next->next) {
-        slow = slow->next;
-        fast = fast->next->next;
+bool isPalindrome(){
+        if (head == NULL){
+            cout << "Linked list is empty." << std::endl;
+            return false;
+        }
+        Node *temp = head;
+        while (temp->next != NULL){
+            temp = temp->next;
+        }
+
+        Node *temp2 = head;
+        while (temp2 != temp && temp2->next != temp){
+            if (temp2->data != temp->data){
+                return false;
+            }
+            temp2 = temp2->next;
+            temp = temp->prev;
+        }
+        return true;
     }
-
-    Node *secondHalf = slow->next;
-    slow->next = nullptr;
-
-    Node *prev = nullptr, *current = secondHalf;
-    while (current) {
-        Node *next = current->next;
-        current->next = prev;
-        current->prev = next;
-        prev = current;
-        current = next;
-    }
-
-    while (prev && head) {
-        if (prev->data != head->data) return false;
-        prev = prev->prev;
-        head = head->next;
-    }
-
-    return true;
-}
 
 void reverseList() {
         Node *curr = head;
