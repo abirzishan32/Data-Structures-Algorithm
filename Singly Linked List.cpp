@@ -198,6 +198,22 @@ public:
             }
         }
 
+
+    void modeFirstToLast(){
+        if (head == nullptr || head->next == nullptr) {
+        return;
+    }
+    Node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+    current->next = head;
+    head = head->next;
+    current->next->next = nullptr;
+    }
+
+
+
     void deleteAtHead() {
         Node *temp = head;
         head = head->next;
@@ -304,12 +320,14 @@ public:
             temp1->next = temp2;
         }
     
-    void mergeLinkedListAlternately(LinkedList& list1, LinkedList& list2) {
+
+
+
+    void mergeLinkedListInShuffle(LinkedList& list1, LinkedList& list2) {
     Node* node1 = list1.head;
     Node* node2 = list2.head;
     Node* prev = nullptr;
     Node* mergedHead = nullptr;
-
     while (node1 != nullptr && node2 != nullptr) {
         if (mergedHead == nullptr) {
             mergedHead = node1;
@@ -334,7 +352,6 @@ public:
     list1.head = mergedHead;
     list2.head = nullptr;
 }
-    
     
     
     
@@ -366,6 +383,8 @@ int main(int argc, const char** argv) {
     l1.insertLast(5);
     l1.insertBefore(3, 2);
     l1.traverse();
+    l1.modeFirstToLast();
+    l1.traverse();
     LinkedList l2;
     l2.insertAtHead(4);
     l2.insertLast(6);
@@ -377,7 +396,7 @@ int main(int argc, const char** argv) {
     l1.traverse();
     l2.reverseList();
     l2.traverse();
-    l1.mergeLinkedListAlternately(l1, l2);
+    l1.mergeLinkedListInShuffle(l1, l2);
     l1.traverse();
     return 0;
 }
