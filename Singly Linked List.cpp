@@ -357,3 +357,27 @@ public:
             }
         }    
 };
+
+int main(int argc, const char** argv) {
+    LinkedList l1;
+    l1.insertAtHead(3);
+    l1.insertAtHead(1);
+    l1.insertAt(2, 3);
+    l1.insertLast(5);
+    l1.insertBefore(3, 2);
+    l1.traverse();
+    LinkedList l2;
+    l2.insertAtHead(4);
+    l2.insertLast(6);
+    l2.insertAtHead(9);
+    l2.insertAt(1, 2);
+    l2.insertAfter(2, 6);
+    l2.traverse();
+    l1.removeDuplicates();
+    l1.traverse();
+    l2.reverseList();
+    l2.traverse();
+    l1.mergeLinkedListAlternately(l1, l2);
+    l1.traverse();
+    return 0;
+}
