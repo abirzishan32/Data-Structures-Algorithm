@@ -1,25 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
-void swp(int *a , int *b){
-    *a ^= *b ^= *a ^= *b ;
+
+
+void Swap(int &a , int &b){
+    a = a+b;
+    b = a-b;
+    a = a-b;
 }
-void selectionSort(int arr[], int n) 
-{ 
-    int i, j, min_idx; 
-    for (i = 0; i < n-1; i++){
-        min_idx = i; 
-        for (j = i+1; j < n; j++){
-          if (arr[j] < arr[min_idx]) 
-              min_idx = j;
+void bubbleSort(int *ara , int n){
+    for(int i = 0 ; i < n-1 ; i++){
+        bool flag=false;
+        for(int j = 0 ; j < n - i - 1 ; j++){
+            if(ara[j] > ara[j+1]) {
+                Swap(ara[j] , ara[j+1]);
+                flag=true;
+            }
         }
-        if (min_idx!=i) swp(&arr[min_idx], &arr[i]);
+        if(!flag){
+            break;
+        }
     }
-} 
+}
+
 int main(){
-    int n ;
-    cin >> n ;
-    int a[n] ;
-    for(int i = 0 ; i < n ; i++) cin >> a[i] ;
-    selectionSort(a , n) ;
-    for(int i = 0 ; i < n ; i++) cout << a[i] << " " ;
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int n ;
+  cin >> n ;
+  int a[n] ;
+  for(int i = 0 ; i < n ; i++) cin >> a[i] ;
+  bubbleSort(a , n) ;
+  for(int i = 0 ; i < n ; i++) cout << a[i] << " " ;
+  return 0;
 }
