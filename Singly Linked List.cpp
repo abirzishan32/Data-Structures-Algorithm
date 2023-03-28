@@ -323,23 +323,16 @@ public:
 
 
 
-    void mergeLinkedListInShuffle(LinkedList& list1, LinkedList& list2) {
-    Node* node1 = list1.head;
-    Node* node2 = list2.head;
-    Node* prev = nullptr;
-    Node* mergedHead = nullptr;
-    while (node1 != nullptr && node2 != nullptr) {
-        if (mergedHead == nullptr) {
-            mergedHead = node1;
-            prev = node1;
+    void mergedLinkedListInShuffle(LinkedList &list1, LinkedList &list2){
+        Node *node1 = list1.head, *node2 = list2.head;
+        while (node1!=NULL && node2!=NULL) {
+            Node *temp = new Node();
+            temp -> data = node2 ->data;
+            temp ->next = node1->next;
+            node1 -> next = temp;
             node1 = node1->next;
-        } else {
-            prev->next = node2;
-            prev = node2;
+            node1 = node1->next;
             node2 = node2->next;
-            prev->next = node1;
-            prev = node1;
-            node1 = node1->next;
         }
     }
 
@@ -396,7 +389,7 @@ int main(int argc, const char** argv) {
     l1.traverse();
     l2.reverseList();
     l2.traverse();
-    l1.mergeLinkedListInShuffle(l1, l2);
+    l1.mergedLinkedListInShuffle(l1, l2);
     l1.traverse();
     return 0;
 }
