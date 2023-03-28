@@ -304,6 +304,39 @@ public:
             temp1->next = temp2;
         }
     
+    void mergeLinkedListAlternately(LinkedList& list1, LinkedList& list2) {
+    Node* node1 = list1.head;
+    Node* node2 = list2.head;
+    Node* prev = nullptr;
+    Node* mergedHead = nullptr;
+
+    while (node1 != nullptr && node2 != nullptr) {
+        if (mergedHead == nullptr) {
+            mergedHead = node1;
+            prev = node1;
+            node1 = node1->next;
+        } else {
+            prev->next = node2;
+            prev = node2;
+            node2 = node2->next;
+            prev->next = node1;
+            prev = node1;
+            node1 = node1->next;
+        }
+    }
+
+    if (node1 == nullptr) {
+        prev->next = node2;
+    } else {
+        prev->next = node1;
+    }
+
+    list1.head = mergedHead;
+    list2.head = nullptr;
+}
+    
+    
+    
     
     void removeDuplicates() {
             Node *ptr1 = head;
