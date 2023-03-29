@@ -83,6 +83,29 @@ public:
         }
         std::cout << endl;
     }
+    
+
+  
+
+bool isBalanced(string parentheses) {
+    stack<char> s;
+    for (char c : parentheses) {
+        if (c == '(' || c == '[' || c == '{') {
+            s.push(c);
+        } else if (c == ')' || c == ']' || c == '}') {
+            if (s.empty()) {
+                return false;
+            } else if ((c == ')' && s.top() == '(') ||
+                       (c == ']' && s.top() == '[') ||
+                       (c == '}' && s.top() == '{')) {
+                s.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+    return s.empty();
+}
 };
 
 
