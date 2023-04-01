@@ -40,10 +40,10 @@ public:
     }
 
     void insertAtHead(int data) {
-        Node *newNode = new Node();
-        newNode->data = data;
-        newNode->next = head;
-        head = newNode;
+        Node *temp = new Node();
+        temp->data = data;
+        temp->next = head;
+        head = temp;
     }
     
     void insertLast(int data) {
