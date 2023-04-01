@@ -492,6 +492,32 @@ public:
         list2.head = nullptr;
     }
     
+    void mergeLinkedListsInShuffle2(LinkedList l1, LinkedList l2)
+    {
+        Node *p = l1.head;
+        Node *q = l2.head;
+        Node *p_curr = p, *q_curr = q;
+        Node *p_next, *q_next;
+      
+        // While there are available positions in p
+        while (p_curr != NULL && q_curr != NULL)
+        {
+            // Save next pointers
+            p_next = p_curr->next;
+            q_next = q_curr->next;
+      
+            // Make q_curr as next of p_curr
+            q_curr->next = p_next; // Change next pointer of q_curr
+            p_curr->next = q_curr; // Change next pointer of p_curr
+      
+            // Update current pointers for next iteration
+            p_curr = p_next;
+            q_curr = q_next;
+        }
+      
+        q = q_curr; // Update head pointer of second list
+    }
+    
     
     
     //Insert a node into a sorted linked list so that the linked list remain sorted after insertion
