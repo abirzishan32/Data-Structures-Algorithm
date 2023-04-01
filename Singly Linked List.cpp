@@ -330,6 +330,29 @@ public:
             }
         }
     
+    
+    //Grouping all odd nodes together followed by the even nodes
+    void groupOddEvenNodes() {
+        if (head == nullptr || head->next == nullptr) {
+            return;
+        }
+
+        Node *oddTail = head;
+        Node *evenHead = head->next;
+        Node *evenTail = evenHead;
+
+        while (evenTail != nullptr && evenTail->next != nullptr) {
+            oddTail->next = evenTail->next;
+            oddTail = oddTail->next;
+            evenTail->next = oddTail->next;
+            evenTail = evenTail->next;
+        }
+
+        oddTail->next = evenHead;
+    }
+    
+    
+    
     //Merging two Linked Lists
     void mergeLists(LinkedList &list1, LinkedList &list2) {
             Node *temp1 = list1.head;
