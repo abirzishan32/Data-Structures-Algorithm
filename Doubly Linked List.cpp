@@ -73,42 +73,30 @@ public:
     newNode->prev = temp;
 }
 
-void insertAtPosition(int value, int pos) {
-    Node *newNode = new Node();
-    newNode->data = value;
-    newNode->next = nullptr;
-    newNode->prev = nullptr;
-    
-    if (head == nullptr) {
-        head = newNode;
+void insertAt(int data, int position) {
+    Node *temp = new Node();
+    temp->data = data;
+    if (position == 1) {
+        temp->next = head;
+        temp->prev = nullptr;
+        if (head != nullptr) {
+            head->prev = temp;
+        }
+        head = temp;
         return;
     }
-    
-    if (pos == 0) {
-        newNode->next = head;
-        head->prev = newNode;
-        head = newNode;
-        return;
+    Node *temp2 = head;
+    for (int i = 0; i < position - 2; i++) {
+        temp2 = temp2->next;
     }
-    
-    Node *current = head;
-    int i = 0;
-    while (current->next != nullptr && i < pos - 1) {
-        current = current->next;
-        i++;
+    temp->next = temp2->next;
+    temp->prev = temp2;
+    if (temp2->next != nullptr) {
+        temp2->next->prev = temp;
     }
-    
-    if (current->next == nullptr) {
-        current->next = newNode;
-        newNode->prev = current;
-    } 
-    else {
-        newNode->next = current->next;
-        newNode->prev = current;
-        current->next->prev = newNode;
-        current->next = newNode;
-    }
+    temp2->next = temp;
 }
+
 
 void deleteHead() {
     if (head == nullptr) {  // if list is empty, return
