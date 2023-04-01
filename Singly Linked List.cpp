@@ -311,6 +311,26 @@ public:
         }
     
     
+        void removeDuplicates() {
+            Node *ptr1 = head;
+            Node *ptr2;
+            Node *dup;
+            while (ptr1 != nullptr && ptr1->next != nullptr) {
+                ptr2 = ptr1;
+                while (ptr2->next != nullptr) {
+                    if (ptr1->data == ptr2->next->data) {
+                        dup = ptr2->next;
+                        ptr2->next = ptr2->next->next;
+                        delete dup;
+                    } else {
+                        ptr2 = ptr2->next;
+                    }
+                }
+                ptr1 = ptr1->next;
+            }
+        }
+    
+    //Merging two Linked Lists
     void mergeLists(LinkedList &list1, LinkedList &list2) {
             Node *temp1 = list1.head;
             Node *temp2 = list2.head;
@@ -320,10 +340,44 @@ public:
             temp1->next = temp2;
         }
     
+    
+    //Function that will merge two Linked Lists of int, assuming that they are
+    //sorted in ascending order. The merged list should be sorted in ascending order
+    void mergeSortedLists(LinkedList& list1, LinkedList& list2) {
+        Node* curr1 = list1.head;
+        Node* curr2 = list2.head;
+        Node* prev = nullptr;
 
+        while (curr1 != nullptr && curr2 != nullptr) {
+            if (curr1->data < curr2->data) {
+                prev = curr1;
+                curr1 = curr1->next;
+            } else {
+                if (prev != nullptr) {
+                    prev->next = curr2;
+                } else {
+                    list1.head = curr2;
+                }
+                Node* temp = curr2->next;
+                curr2->next = curr1;
+                prev = curr2;
+                curr2 = temp;
+            }
+        }
 
-
-       void mergeLinkedListsInShuffle(LinkedList& list1, LinkedList& list2) {
+        if (curr2 != nullptr) {
+            if (prev != nullptr) {
+                prev->next = curr2;
+            } else {
+                list1.head = curr2;
+            }
+        }
+    }
+    
+    
+    
+    //Given two linked list, Print the two linked lists into shuffle
+    void mergeLinkedListsInShuffle(LinkedList& list1, LinkedList& list2) {
         Node* node1 = list1.head;
         Node* node2 = list2.head;
         Node* prev = nullptr;
@@ -356,48 +410,56 @@ public:
     
     
     
-    void removeDuplicates() {
-            Node *ptr1 = head;
-            Node *ptr2;
-            Node *dup;
-            while (ptr1 != nullptr && ptr1->next != nullptr) {
-                ptr2 = ptr1;
-                while (ptr2->next != nullptr) {
-                    if (ptr1->data == ptr2->next->data) {
-                        dup = ptr2->next;
-                        ptr2->next = ptr2->next->next;
-                        delete dup;
-                    } else {
-                        ptr2 = ptr2->next;
-                    }
-                }
-                ptr1 = ptr1->next;
-            }
+    //Insert a node into a sorted linked list so that the linked list remain sorted after insertion
+    void insertAtSortedArray(int value){
+        Node *temp = new Node();
+        temp->data = value;
+        temp->next = nullptr;
+        if (head == nullptr) {
+            head = temp;
+            return;
         }
+        if (value < head->data) {
+            temp->next = head;
+            head = temp;
+            return;
+        }
+        Node *cur = head;
+        while (cur->next != nullptr && cur->next->data < value) {
+            cur = cur->next;
+        }
+        temp->next = cur->next;
+        cur->next = temp;
+    }
+    
+    
+    
+    
+    
 };
 
 int main(int argc, const char** argv) {
-    LinkedList l1;
-    l1.insertAtHead(3);
-    l1.insertAtHead(1);
-    l1.insertAt(2, 3);
-    l1.insertLast(5);
-    l1.insertBefore(3, 2);
-    l1.traverse();
-    l1.modeFirstToLast();
-    l1.traverse();
-    LinkedList l2;
-    l2.insertAtHead(4);
-    l2.insertLast(6);
-    l2.insertAtHead(9);
-    l2.insertAt(1, 2);
-    l2.insertAfter(2, 6);
-    l2.traverse();
-    l1.removeDuplicates();
-    l1.traverse();
-    l2.reverseList();
-    l2.traverse();
-    l1.mergeLinkedListsInShuffle(l1, l2);
-    l1.traverse();
+        LinkedList l1;
+        l1.insertAtHead(3);
+        l1.insertAtHead(1);
+        l1.insertAt(2, 3);
+        l1.insertLast(5);
+        l1.insertBefore(3, 2);
+        l1.traverse();
+        l1.moveFirstToLast();
+        l1.traverse();
+        LinkedList l2;
+        l2.insertAtHead(4);
+        l2.insertLast(6);
+        l2.insertAtHead(9);
+        l2.insertAt(1, 2);
+        l2.insertAfter(2, 6);
+        l2.traverse();
+        l1.removeDuplicates();
+        l1.traverse();
+        l2.reverseList();
+        l2.traverse();
+        l1.mergeLinkedListsInShuffle(l1, l2);
+        l1.traverse();
     return 0;
 }
