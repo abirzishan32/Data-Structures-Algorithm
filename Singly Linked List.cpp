@@ -460,39 +460,8 @@ public:
     
     
     
-    //Given two linked list, Print the two linked lists into shuffle
-    void mergeLinkedListsInShuffle(LinkedList& list1, LinkedList& list2) {
-        Node* node1 = list1.head;
-        Node* node2 = list2.head;
-        Node* prev = nullptr;
-        Node* mergedHead = nullptr;
-
-        while (node1 != nullptr && node2 != nullptr) {
-            if (mergedHead == nullptr) {
-                mergedHead = node1;
-                prev = node1;
-                node1 = node1->next;
-            } else {
-                prev->next = node2;
-                prev = node2;
-                node2 = node2->next;
-                prev->next = node1;
-                prev = node1;
-                node1 = node1->next;
-            }
-        }
-
-        if (node1 == nullptr) {
-            prev->next = node2;
-        } else {
-            prev->next = node1;
-        }
-
-        list1.head = mergedHead;
-        list2.head = nullptr;
-    }
-    
-    void mergeLinkedListsInShuffle2(LinkedList l1, LinkedList l2)
+    //Given two linked list, Print the two linked lists into shuffle   
+    void mergeLinkedListsInShuffle(LinkedList l1, LinkedList l2)
     {
         Node *p = l1.head;
         Node *q = l2.head;
