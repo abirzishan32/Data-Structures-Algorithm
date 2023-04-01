@@ -105,9 +105,13 @@ public:
         }
         int cnt=0;
         Node *temp = head;
-        while(temp->data != target && temp->next != NULL){
+        while(temp->data != target){
             temp = temp->next;
             cnt++;
+            if (temp->next == NULL) {
+                cout<<"Target value not found"<<endl;
+                return;
+            }
         }
         cnt++;
         insertAt(value, cnt);
