@@ -340,7 +340,7 @@ public:
     void reverseList() {
             Node *prev = NULL;
             Node *curr = head;
-            Node *next = NULL;
+            Node *next;
             
             while (curr != NULL) {
                 next = curr->next;
