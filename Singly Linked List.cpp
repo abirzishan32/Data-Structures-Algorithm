@@ -137,14 +137,15 @@ public:
     void insertAfter2 (int value, int target){
         int cnt=0;
         Node *temp = head;
-        while(temp->data != target && temp->next != NULL){
+        while(temp->data != target){
             temp = temp->next;
             cnt++;
+            if(temp->next == NULL){
+                cout<<"Target data not found"<<endl;
+                return;
+            }
         }
-        if(temp->next == NULL){
-            cout<<"Data not found"<<endl;
-            return;
-        }
+
         cnt+=2;
         insertAt(value, cnt);
 
@@ -243,30 +244,29 @@ public:
         }
     
     
-    void deleteAtIndex(int index) {
+   void deleteAtIndex(int index) {
         if (head == NULL) {
             cout << "Linked list is empty" << endl;
             return;
         }
-        if (index == 0) {
+        if (index == 1) {
             Node *temp = head;
             head = head->next;
             delete temp;
             return;
         }
-        int count = 0;
-        Node *temp = head;
-        while (temp != NULL && count < index - 1) {
-            temp = temp->next;
-            count++;
+        Node *cur = head;
+        for(int i=0; i<index-2 && cur!= NULL; i++){
+            cur = cur->next;
         }
-        if (temp == NULL || temp->next == NULL) {
-            cout << "Index out of range" << endl;
+        if (cur == NULL) {
+            cout<<"Out of bounds"<<endl;
             return;
         }
-        Node *toDelete = temp->next;
-        temp->next = temp->next->next;
-        delete toDelete;
+        
+        Node *temp = cur->next;
+        cur->next = cur->next->next;
+        delete temp;
     }
     
     
