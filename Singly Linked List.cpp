@@ -279,7 +279,7 @@ public:
         while (temp->next != NULL && temp->next->data != target) {
             temp = temp->next;
         }
-        if(temp == nullptr){
+        if(temp->next == nullptr){
             cout<<"Target not found"<<endl;
             return;
         }
