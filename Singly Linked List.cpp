@@ -300,6 +300,31 @@ public:
             return count;
         }
     
+    Node* splitLinkedList(int index) {
+            // If the linked list is empty or the index is out of range, return null
+            if (head == nullptr || index <= 0) {
+                return nullptr;
+            }
+
+            // Traverse the linked list until we reach the node just before the split point
+            Node* current = head;
+            int count = 1;
+            while (current != nullptr && count < index) {
+                current = current->next;
+                count++;
+            }
+
+            // If the split point is beyond the end of the linked list, return null
+            if (current == nullptr) {
+                return nullptr;
+            }
+
+            // Set the second half of the linked list to start at the split point, and return its head
+            Node* secondHalf = current->next;
+            current->next = nullptr;
+            return secondHalf;
+        }
+    
     
     void sort() {
             Node *i, *j;
@@ -505,5 +530,11 @@ int main(int argc, const char** argv) {
         l2.traverse();
         l1.mergeLinkedListsInShuffle(l1, l2);
         l1.traverse();
+        Node *secondHalf = l1.splitLinkedList(3);
+        l1.traverse();
+        while (secondHalf!=NULL) {
+            cout<<secondHalf->data<<' ';
+            secondHalf = secondHalf->next;
+        }
     return 0;
 }
