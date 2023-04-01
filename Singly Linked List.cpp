@@ -269,7 +269,24 @@ public:
         delete temp;
     }
     
-    
+    void deleteValue (int target){
+        Node *temp = head;
+        if (temp->data == target) {
+            head = head->next;
+            delete temp;
+            return;
+        }
+        while (temp->next != NULL && temp->next->data != target) {
+            temp = temp->next;
+        }
+        if(temp == nullptr){
+            cout<<"Target not found"<<endl;
+            return;
+        }
+        Node *toDelete = temp->next;
+        temp->next = temp->next->next;
+        delete toDelete;
+    }
     
     int countFrequency(int value) {
             int count = 0;
