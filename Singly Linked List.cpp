@@ -439,6 +439,26 @@ public:
     }
     
     
+    Node* mergeSortedLists2(Node* h1, Node* h2){
+        if (h1 == nullptr) {
+            return h2;
+        }
+        if (h2 == nullptr) {
+            return h1;
+        }
+        
+        if (h1-> data < h2->data) {
+            h1->next = mergeSortedLists2(h1->next, h2);
+            return h1;
+        }
+        else{
+            h2->next = mergeSortedLists2(h1, h2->next);
+            return h2;
+        }
+        
+    }
+    
+    
     
     //Given two linked list, Print the two linked lists into shuffle
     void mergeLinkedListsInShuffle(LinkedList& list1, LinkedList& list2) {
