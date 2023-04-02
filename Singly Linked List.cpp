@@ -236,11 +236,11 @@ public:
                 return;
             }
             Node *temp = head;
-            while (temp->next->next != NULL) {
-                temp = temp->next;
+            while (temp->next->next != NULL) { //By writing temp->next->next != NULL, we want to point the node previous of the last node. So after
+                temp = temp->next;              //the end of the loop, temp will point to the second last node of the linked list
             }
-            delete temp->next;
-            temp->next = NULL;
+            delete temp->next;                 //temp is pointing to the second last element of the ll. So by deleting temp->next, we are trying to delete 
+            temp->next = NULL;                 //the last element of the ll. Then we will make the next of temp (the current last element after deletion) as nullptr.
         }
     
     
