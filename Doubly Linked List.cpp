@@ -131,29 +131,36 @@ void deleteLast() {
 }
 
 void deleteAtIndex(int index) {
-    if (head == nullptr) {  // if list is empty, return
-        return;
+        if (head == NULL) {
+            cout << "Linked list is empty" << endl;
+            return;
+        }
+        if (index == 1) {
+            Node *temp = head;
+            head = head->next;
+            if (head != NULL) {
+                head->prev = NULL;
+            }
+            delete temp;
+            return;
+        }
+        Node *cur = head;
+        for(int i=0; i<index-2 && cur->next!= NULL; i++){
+            cur = cur->next;
+        }
+        if (cur->next == NULL) {
+            cout<<"Out of bounds"<<endl;
+            return;
+        }
+        
+        Node *temp = cur->next;
+        cur->next = cur->next->next;
+        if (cur->next != NULL) {
+            cur->next->prev = cur;
+        }
+        delete temp;
     }
-    Node *current = head;
-    int i = 0;
-    while (i < index && current != nullptr) {
-        current = current->next;
-        i++;
-    }
-    if (current == nullptr) {  // if index is out of bounds, return
-        return;
-    }
-    if (current == head) {  // if index is 0
-        head = current->next;
-    }
-    if (current->prev != nullptr) {
-        current->prev->next = current->next;
-    }
-    if (current->next != nullptr) {
-        current->next->prev = current->prev;
-    }
-    delete current;
-}
+
 
 
 
