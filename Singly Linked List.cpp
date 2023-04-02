@@ -288,6 +288,20 @@ public:
         delete toDelete;
     }
     
+    void deleteValue2 (int target){
+        Node *cur = head;
+        int index = 1;
+        while (cur->data != target && cur->next != NULL) {
+            cur = cur->next;
+            index++;
+        }
+        if (cur->next == NULL) {
+            cout<<"Not found"<<endl;
+            return;
+        }
+        deleteAtIndex(index);
+    }
+    
     int countFrequency(int value) {
             int count = 0;
             Node *temp = head;
