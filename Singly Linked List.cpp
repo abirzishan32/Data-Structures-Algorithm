@@ -351,16 +351,15 @@ public:
     
     
     
-    void reverseList() {
+   void reverseList() {
             Node *prev = NULL;
-            Node *curr = head;
-            Node *next;
+            Node *next = NULL;
             
-            while (curr != NULL) {
-                next = curr->next;
-                curr->next = prev;
-                prev = curr;
-                curr = next;
+            while (head != NULL) {
+                next = head->next;
+                head->next = prev;
+                prev = head;
+                head = next;
             }
             head = prev;
         }
