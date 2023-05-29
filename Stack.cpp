@@ -182,6 +182,44 @@ bool isBalanced(string parentheses) {
         // The final result will be at the top of the stack
         return operands.top();
     }
+    
+    
+vector<int> findNextGreater(const vector<int>& nums) {
+    int n = nums.size();
+    vector<int> result(n, -1);  // Initialize result vector with -1
+    stack<int> st;
+
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && nums[i] > nums[st.top()]) {
+            // nums[i] is the next greater element for elements at indices stored in the stack
+            result[st.top()] = nums[i];
+            st.pop();
+        }
+        // Push the current index onto the stack
+        st.push(i);
+    }
+
+    return result;
+}
+    
+    vector<int> findNextSmaller(const vector<int>& nums) {
+    int n = nums.size();
+    vector<int> result(n, -1);  // Initialize result vector with -1
+    stack<int> st;
+
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && nums[i] < nums[st.top()]) {
+            // nums[i] is the next smaller element for elements at indices stored in the stack
+            result[st.top()] = nums[i];
+            st.pop();
+        }
+        // Push the current index onto the stack
+        st.push(i);
+    }
+
+    return result;
+}
+
 };
 
 
