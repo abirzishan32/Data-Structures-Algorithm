@@ -471,6 +471,33 @@ public:
         
     }
     
+    Node* mergeSortedLists3(Node* listA, Node* listB) {
+        Node* temp = new Node();
+        Node* tail = temp;
+
+        while (true) {
+            if (listA == nullptr) {
+                tail->next = listB;
+                break;
+            }
+            if (listB == nullptr) {
+                tail->next = listA;
+                break;
+            }
+
+            if (listA->data <= listB->data) {
+                tail->next = listA;
+                listA = listA->next;
+            }
+            else {
+                tail->next = listB;
+                listB = listB->next;
+            }
+
+            tail = tail->next;
+        }
+        return temp->next;
+    }
     
     
     //Given two linked list, Print the two linked lists into shuffle   
@@ -551,6 +578,13 @@ int main(int argc, const char** argv) {
         l1.traverse();
         l2.reverseList();
         l2.traverse();
+        LinkedList mergedList;
+        Node* result = mergedList.mergeLinkedList(l1.head, l2.head);
+        Node* current = result;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
         l1.mergeLinkedListsInShuffle(l1, l2);
         l1.traverse();
         LinkedList second;
