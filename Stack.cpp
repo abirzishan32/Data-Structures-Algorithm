@@ -106,6 +106,82 @@ bool isBalanced(string parentheses) {
     }
     return s.empty();
 }
+    
+    
+    int evaluatePostfix(const string& expression) {
+    stack<int> operands;
+
+    for (char ch : expression) {
+        if (isdigit(ch)) {
+            // Convert the character to integer and push onto the stack
+            operands.push(ch - '0');
+        } else {
+            // Operator encountered, perform operation on operands
+            int operand2 = operands.top();
+            operands.pop();
+
+            int operand1 = operands.top();
+            operands.pop();
+
+            int result;
+            if (ch == '+') {
+                result = operand1 + operand2;
+            } else if (ch == '-') {
+                result = operand1 - operand2;
+            } else if (ch == '*') {
+                result = operand1 * operand2;
+            } else if (ch == '/') {
+                result = operand1 / operand2;
+            }
+            // Handle any other operators if necessary
+
+            // Push the result back onto the stack
+            operands.push(result);
+        }
+    }
+
+    // The final result will be at the top of the stack
+    return operands.top();
+}
+    
+    int evaluatePrefix(const string& expression) {
+    stack<int> operands;
+
+    // Read the expression in reverse order
+    for (int i = expression.length() - 1; i >= 0; i--) {
+        char ch = expression[i];
+
+        if (isdigit(ch)) {
+            // Convert the character to integer and push onto the stack
+            operands.push(ch - '0');
+        } else {
+            // Operator encountered, perform operation on operands
+            int operand1 = operands.top();
+            operands.pop();
+
+            int operand2 = operands.top();
+            operands.pop();
+
+            int result;
+            if (ch == '+') {
+                result = operand1 + operand2;
+            } else if (ch == '-') {
+                result = operand1 - operand2;
+            } else if (ch == '*') {
+                result = operand1 * operand2;
+            } else if (ch == '/') {
+                result = operand1 / operand2;
+            }
+            // Handle any other operators if necessary
+
+            // Push the result back onto the stack
+            operands.push(result);
+        }
+    }
+
+        // The final result will be at the top of the stack
+        return operands.top();
+    }
 };
 
 
