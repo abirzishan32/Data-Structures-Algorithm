@@ -64,11 +64,18 @@ void inserto(int data,int i)
 
 
 
-void Delete1(int *arr, int &n){
-    int last = arr[n];
-    arr[1] = last;
-    n = n-1;
-    heapify(arr, n, 1);
+void deleteFromHeap(int *arr, int& n, int index) {
+    if (index >= n) {
+        cout << "Invalid index!" << endl;
+        return;
+    }
+
+    // Replace the element at the given index with the last element in the heap
+    arr[index] = arr[n - 1];
+    n--;
+
+    // Perform heapify to restore the heap property
+    heapify(arr, n, index);
 }
 
 
