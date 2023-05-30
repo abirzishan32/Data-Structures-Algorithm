@@ -3,8 +3,8 @@ using namespace std;
 
 void heapify(vector<int>& arr, int n, int root) {
     int largest = root;    // Initialize the largest element as the root
-    int left = 2 * root + 1;    // Left child index
-    int right = 2 * root + 2;   // Right child index
+    int left = 2 * root;    // Left child index
+    int right = 2 * root + 1;   // Right child index
 
     // Check if the left child is larger than the root
     if (left < n && arr[left] > arr[largest])
