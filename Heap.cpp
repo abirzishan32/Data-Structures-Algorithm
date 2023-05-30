@@ -1,19 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void heapify(int *arr, int n, int i){
-    int largest = i;
-    int left=2*i, right=2*i+1;
+void heapify(vector<int>& arr, int n, int root) {
+    int largest = root;    // Initialize the largest element as the root
+    int left = 2 * root + 1;    // Left child index
+    int right = 2 * root + 2;   // Right child index
 
-    if(i<n && arr[left] > arr[largest]){
-        largest=left;
-    }
-    if(right<n && arr[right] > arr[largest]){
-        largest=right;
-    }
+    // Check if the left child is larger than the root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
 
-    if(largest != i){
-        swap(arr[i], arr[largest]);
+    // Check if the right child is larger than the current largest
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // If the largest element is not the root, swap them and heapify the affected sub-tree
+    if (largest != root) {
+        swap(arr[root], arr[largest]);
         heapify(arr, n, largest);
     }
 }
