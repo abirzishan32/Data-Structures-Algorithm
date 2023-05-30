@@ -14,40 +14,53 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 #define MOD 998244353
 #define N 10000005
-#define fr(i,a,b) for(int i = a;i<b;i++)
-#define fri(i,a,b) for(int i = a;i>=b;i--)
+#define fr(i, a, b) for (int i = a; i < b; i++)
+#define fri(i, a, b) for (int i = a; i >= b; i--)
 #define pb push_back
-#define pyn(flag) cout<<(flag?"YES":"NO")<<endl;
-#define vin cin>>v[i]
+#define pyn(flag) cout << (flag ? "YES" : "NO") << endl;
+#define vin cin >> v[i]
 #define vsort sort(v.begin(), v.end())
 #define vrev reverse(v.begin(), v.end())
-#define yout cout<<"YES"<<endl
-#define nout cout<<"NO"<<endl
+#define yout cout << "YES" << endl
+#define nout cout << "NO" << endl
 
-void dfs(int node, vector<vector<int> >& adj, vector<bool>& vis, stack<int>& st) {
-    vis[node] = true;
-    for (auto it : adj[node]) {
-        if (!vis[it]) {
-            dfs(it, adj, vis, st);
+vector<int> iterativeDFS(int start, vector<vector<int> >& adj, vector<bool>& visited) {
+    vector<int> result;
+    stack<int> st;
+    st.push(start);
+
+    while (!st.empty()) {
+        int node = st.top();
+        st.pop();
+
+        if (!visited[node]) {
+            visited[node] = true;
+            result.push_back(node);
+        }
+
+        for (auto it : adj[node]) {
+            if (!visited[it]) {
+                st.push(it);
+            }
         }
     }
-    st.push(node);
+
+    return result;
 }
 
-vector<int> TopoSort(int n, vector<vector<int> >& adj) {
-    vector<bool> vis(n, false);
-    stack<int> st;
+vector<int> topologicalSort(int n, vector<vector<int> >& adj) {
+    vector<bool> visited(n, false);
+    vector<int> result;
+
     for (int i = 0; i < n; i++) {
-        if (!vis[i]) {
-            dfs(i, adj, vis, st);
+        if (!visited[i]) {
+            vector<int> nodes = iterativeDFS(i, adj, visited);
+            result.insert(result.end(), nodes.begin(), nodes.end());
         }
     }
-    vector<int> ans;
-    while (!st.empty()) {
-        ans.push_back(st.top());
-        st.pop();
-    }
-    return ans;
+
+    reverse(result.begin(), result.end());
+    return result;
 }
 
 int main() {
@@ -65,7 +78,7 @@ int main() {
         adj[u].push_back(v);
     }
 
-    vector<int> topo = TopoSort(V, adj);
+    vector<int> topo = topologicalSort(V, adj);
 
     for (int node : topo) {
         cout << node << " ";
