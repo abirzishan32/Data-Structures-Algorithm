@@ -78,6 +78,19 @@ void deleteFromHeap(int *arr, int& n, int index) {
     heapify(arr, n, index);
 }
 
+void heapSort(vector<int>& arr) {
+    int n = arr.size();
+
+    // Build the max heap
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // Extract elements from the heap one by one
+    for (int i = n - 1; i >= 0; i--) {
+        swap(arr[0], arr[i]);    // Move the current root to the end
+        heapify(arr, i, 0);      // Heapify the reduced heap
+    }
+}
 
 
 void Delete2(int *arr, int &n){
